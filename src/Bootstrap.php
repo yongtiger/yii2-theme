@@ -1,10 +1,10 @@
 <?php ///[yii2-theme]
 
 /**
- * Yii2 theme yii
+ * Yii2 theme
  *
  * @link        http://www.brainbook.cc
- * @see         https://github.com/yongtiger/yii2-theme-yii2
+ * @see         https://github.com/yongtiger/yii2-theme
  * @author      Tiger Yong <tigeryang.brainbook@outlook.com>
  * @copyright   Copyright (c) 2017 BrainBook.CC
  * @license     http://opensource.org/licenses/MIT
@@ -13,7 +13,6 @@
 namespace yongtiger\theme;
 
 use Yii;
-
 use yii\base\BootstrapInterface;
 use yii\base\InvalidParamException;
 use yii\helpers\FileHelper;
@@ -27,8 +26,6 @@ use yongtiger\setting\Setting;
  */
 class Bootstrap implements BootstrapInterface
 {
-    static $_themes;
-	static $_activeTheme;
 	static $_themeBootstraps;
 
     /**
@@ -40,34 +37,12 @@ class Bootstrap implements BootstrapInterface
         $namespaceName = $reflector->getNamespaceName();
     	$themePath = call_user_func([$namespaceName . '\\ThemeAsset', 'getThemePath']);
 
-    	$themes = static::getThemes();
+    	$themes = ThemeManager::getThemes();
     	$themes[] = ['namespace' => $namespaceName, 'path' => $themePath, 'active' => false];
-        static::setThemes($themes);
+        ThemeManager::setThemes($themes);
 
     }
 
-    /**
-     * Gets the themes table `theme/thems`.
-     *
-     * @return static
-     */
-    public static function getThemes() {
-        if (static::$_themes === null) {
-            static::$_themes = Setting::get('theme', 'themes', []);   ///get the themes table `theme/thems` from setting
-        }
-        return static::$_themes;
-    }
-
-    /**
-     * Sets the themes table `theme/thems`.
-     *
-     * @param array $themes the themes table `theme/thems`
-     */
-    public static function setThemes($themes) {
-        Setting::set('theme', 'themes', $themes);
-        static::$_themes = $themes;
-    }
-    
     /**
      * Filters bootstraps in `Yii::$app->extensions`.
      *
@@ -75,7 +50,7 @@ class Bootstrap implements BootstrapInterface
      * In other words, if a theme has been registered in the themes table `theme/thems`, you do not need to perform bootstrap.
      */
     public static function filterExtensionsBootstrap() {
-        foreach (static::getThemes() as $theme) {
+        foreach (ThemeManager::getThemes() as $theme) {
 
             ///Get `Yii::$app->extensions`. @see [[yii2\base\Application]]
             if (Yii::$app->extensions === null) {
@@ -111,7 +86,7 @@ class Bootstrap implements BootstrapInterface
     		static::$_themeBootstraps = static::findThemeBootstraps($themesRootPath, $bootstrapPathFile, $bootstrapPathPattern);
     	}
 
-        foreach (static::getThemes() as $theme) {
+        foreach (ThemeManager::getThemes() as $theme) {
             
             ///theme bootstrap class
             $themeBootstrapClass = $theme['namespace'] . '\\Bootstrap'; 
@@ -179,19 +154,5 @@ class Bootstrap implements BootstrapInterface
     	$ret = str_replace('{bootstrap-path-file}', $bootstrapPathFile, $ret);
     	$path = FileHelper::normalizePath($ret, DIRECTORY_SEPARATOR) . '.php';
     	return [$ret, $path]; 
-    }
-    
-    /**
-     * Gets the active theme.
-     *
-     * @return array|false the active theme or false if no any active theme exist
-     */
-    public static function getActiveTheme() {
-    	foreach (static::getThemes() as $theme) {
-    		if ($theme['active']) {
-    			return $theme;
-    		}
-    	}
-    	return false;
     }
 }
