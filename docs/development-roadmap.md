@@ -1,5 +1,7 @@
 # Development roadmap
 
+## v0.1.0 (filter theme bootstrap)
+
 ## v0.0.0 (initial commit)
 
 Features of this version:

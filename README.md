@@ -1,4 +1,4 @@
-# Yii2-theme 
+# Yii2-theme v0.1.0 (filter theme bootstrap)
 
 [![Latest Stable Version](https://poser.pugx.org/yongtiger/yii2-theme/v/stable)](https://packagist.org/packages/yongtiger/yii2-theme)
 [![Total Downloads](https://poser.pugx.org/yongtiger/yii2-theme/downloads)](https://packagist.org/packages/yongtiger/yii2-theme) 
@@ -10,6 +10,8 @@
 
 
 ## DEPENDENCES
+
+* [yongtiger/yii2-setting](https://github.com/yongtiger/yii2-setting)
 
 
 ## INSTALLATION   
