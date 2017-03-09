@@ -10,6 +10,17 @@ use yongtiger\theme\Module;
 
 $this->title = Module::t('message', 'Update Theme');
 
+///[uncheck radio button]
+///@see http://www.mkyong.com/jquery/how-to-select-a-radio-button-with-jquery/
+///@see http://wenda.so.com/q/1364789883063842
+$this->registerJs(
+<<<JS
+    $('input:radio').on('dblclick', function() { 
+    	\$(this).attr('checked',false);
+    });
+JS
+);
+
 ?>
 <h1><?= Html::encode($this->title) ?></h1>
 
