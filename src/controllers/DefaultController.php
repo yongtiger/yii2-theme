@@ -72,10 +72,7 @@ class DefaultController extends Controller
             return $this->refresh();
         }
 
-        ///?????
-        foreach (ThemeManager::getThemes() as $index => $theme) {
-            $themes[$index] = $theme['namespace'];
-        }
-        return $this->render('update', ['model' => $model, 'themes' => $themes]);
+        ///[v0.2.3 (ADD# radioList itme option)]
+        return $this->render('update', ['model' => $model, 'themes' => ThemeManager::getThemes()]);
     }
 }

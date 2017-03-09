@@ -28,7 +28,21 @@ JS
 
     <?php $form = ActiveForm::begin(); ?>
 
-	<?= $form->field($model, 'activeIndex')->inline()->radioList($themes)->label(false) ?>
+	<?= $form->field($model, 'activeIndex')->radioList($themes, 
+        ///[v0.2.3 (ADD# radioList itme option)]
+        ///@see http://stackoverflow.com/questions/28234684/yii-2-radiolist-template
+        [   
+            'item' => function($index, $label, $name, $checked, $value) {
+
+                $return = '<label class="radio-inline">';
+                $return .= '<input type="radio" name="' . $name . '" value="' . $value . '"></input>';
+                $return .= $label['namespace'];
+                $return .= '</label>';
+
+                return $return;
+            }
+        ]
+    ) ?>
 
     <div class="form-group">
         <?= Html::submitButton(Module::t('message', 'Update'),['class' => 'btn btn-primary']) ?>
