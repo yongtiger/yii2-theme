@@ -1,4 +1,4 @@
-# Yii2-theme v0.2.1 (CHG# activeTheme)
+# Yii2-theme v0.2.2 (ADD# uncheck radio button)
 
 [![Latest Stable Version](https://poser.pugx.org/yongtiger/yii2-theme/v/stable)](https://packagist.org/packages/yongtiger/yii2-theme)
 [![Total Downloads](https://poser.pugx.org/yongtiger/yii2-theme/downloads)](https://packagist.org/packages/yongtiger/yii2-theme) 

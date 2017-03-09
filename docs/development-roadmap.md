@@ -1,5 +1,8 @@
 # Development roadmap
 
+## v0.2.2 (ADD# uncheck radio button)
+
+
 ## v0.2.1 (CHG# activeTheme)
 
 
