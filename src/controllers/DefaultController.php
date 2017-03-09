@@ -15,6 +15,8 @@ namespace yongtiger\theme\controllers;
 use Yii;
 use yii\web\Controller;
 use yii\filters\AccessControl;
+use yii\base\Model;
+use yii\base\DynamicModel;
 use yongtiger\theme\ThemeManager;
 
 /**
@@ -24,6 +26,11 @@ use yongtiger\theme\ThemeManager;
  */
 class DefaultController extends Controller
 {
+    /**
+     * @inheritdoc
+     */
+    public $defaultAction = 'update';
+
     /**
      * Defines the controller behaviors
      *
@@ -45,41 +52,30 @@ class DefaultController extends Controller
     }
 
     /**
-     * @inheritdoc
+     * Updates an active theme index.
+     * 
+     * @return mixed
      */
-    // public function actions()
-    // {
-    //     return [
-    //         'error' => [
-    //             'class' => 'yii\web\ErrorAction',
-    //         ],
-    //     ];
-    // }
-
-
     public function actionUpdate()
     {
-        $themes = ThemeManager::getThemes();
+        $activeTheme = ThemeManager::getActiveTheme();
+        $model = new DynamicModel(['activeIndex' => $activeTheme === false ? false : key($activeTheme)]);
+        $model->addRule('activeIndex', 'safe');
 
-        ///Model::loadMultiple() fills multiple models with the form data coming from POST and Model::validateMultiple() validates all models at once.
-        if (Model::loadMultiple($settings, Yii::$app->request->post()) && Model::validateMultiple($settings)) {
+        if ($model->load(Yii::$app->request->post())) {
+            
+            ///radioList:options:unselect: string, the value that should be submitted when none of the radio buttons is selected. You may set this option to be null to prevent default value submission. If this option is not set, an empty string will be submitted.
+            ///@see http://docs.huihoo.com/yii/2.0/yii-helpers-basehtml.html#activeRadioList()-detail
+            ThemeManager::setActiveTheme($model->activeIndex === '' ? false : $model->activeIndex);
 
-            foreach ($settings as $setting) {
-
-                ///[Yii2 setting:multiple-select]Convert the multi-select setting value (not a string, but an array) to JSON string before saving. 
-                ///because the array of multi-select values will not contain sub-array (only string or integer), so you can use json_encode converted to JSON string, e.g '["firstname","lastname","age"]'
-                ///@see http://www.cnblogs.com/xmphoenix/archive/2011/05/26/2057963.html
-                if(in_array($setting['input'], [SettingModel::INPUT_CHECKBOXLIST, SettingModel::INPUT_LISTBOX_MULTIPLE, SettingModel::INPUT_DROPDOWNLIST_MULTIPLE])){
-                    $setting->value = json_encode($setting['value']);
-                }
-
-                $setting->save(false);  ///passing false as a parameter to save() to not run validation twice
-            }
-
-            Yii::$app->session->setFlash('success', Module::t('message', 'Update succeed.'));
+            // Yii::$app->session->setFlash('success', Module::t('message', 'Update succeed.'));
             return $this->refresh();
         }
 
-        return $this->render('update', ['categories' => SettingModel::findAllCategories(), 'category' => $category, 'settings' => $settings]);
+        ///?????
+        foreach (ThemeManager::getThemes() as $index => $theme) {
+            $themes[$index] = $theme['namespace'];
+        }
+        return $this->render('update', ['model' => $model, 'themes' => $themes]);
     }
 }

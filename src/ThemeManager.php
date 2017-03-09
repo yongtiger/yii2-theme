@@ -53,11 +53,30 @@ class ThemeManager
      * @return array|false the active theme or false if no any active theme exist
      */
     public static function getActiveTheme() {
-    	foreach (static::getThemes() as $theme) {
-    		if ($theme['active']) {
-    			return $theme;
-    		}
-    	}
-    	return false;
+        if (static::$_activeTheme === null) {
+            foreach (static::getThemes() as $index => $theme) {
+                if ($theme['active']) {
+                    return static::$_activeTheme = [$index => $theme];
+                }
+            }
+            return false;
+        }
+    	return static::$_activeTheme;
+    }
+
+    /**
+     * Sets the active theme.
+     *
+     * @param int $activeIndex active theme index in thethemes table `theme/thems`
+     */
+    public static function setActiveTheme($activeIndex) {
+        foreach ($themes = static::getThemes() as $index => $theme) {
+            if ($activeIndex !== false && $activeIndex == $index) {
+                $themes[$index]['active'] = true;
+            } else {
+                $themes[$index]['active'] = false;
+            }
+        }
+        static::setThemes($themes);
     }
 }
