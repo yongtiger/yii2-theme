@@ -44,7 +44,7 @@ JS
                 $return = '<div style="display:inline-block">'; ///div horizontal
                 $return .= '<img src="' . $publishUrl . '" width="320"><br>';
                 $return .= '<label class="radio-inline">';
-                $return .= '<input type="radio" name="' . $name . '" value="' . $value . '" checked="' . $checked . '"></input>';
+                $return .= '<input type="radio" name="' . $name . '" value="' . $value . '" ' . ($checked ? 'checked' : '') . '></input>';
                 $return .= $label['title'] ? : '(no title)';
                 $return .= '</label>';
                 $return .= '</div>';

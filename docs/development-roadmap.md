@@ -1,5 +1,8 @@
 # Development roadmap
 
+## v0.2.6 (FIX# update:radio checked)
+
+
 ## v0.2.5 (TYPO)
 
 
