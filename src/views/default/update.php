@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use yongtiger\theme\Module;
+use yongtiger\theme\AssetBundle;
 
 /* @var $this yii\web\View */
 /* @var $model DynamicModel */
@@ -33,16 +34,24 @@ JS
         ///@see http://stackoverflow.com/questions/28234684/yii-2-radiolist-template
         [   
             'item' => function($index, $label, $name, $checked, $value) {
+                ///[v0.2.4 (ADD# theme screenshot, title)]
+                if ($label['screenshot']) {
+                    list($publishFile, $publishUrl) = Yii::$app->assetManager->publish($label['path'] . '/' . $label['screenshot']);
+                } else {
+                    list($publishFile, $publishUrl) = Yii::$app->assetManager->publish('@yongtiger/theme/no-screenshot.png');
+                }
 
-                $return = '<label class="radio-inline">';
+                $return = '<div style="display:inline-block">'; ///div horizontal
+                $return .= '<img src="' . $publishUrl . '" width="320"><br>';
+                $return .= '<label class="radio-inline">';
                 $return .= '<input type="radio" name="' . $name . '" value="' . $value . '"></input>';
-                $return .= $label['namespace'];
+                $return .= $label['title'] ? : '(no title)';
                 $return .= '</label>';
-
+                $return .= '</div>';
                 return $return;
             }
         ]
-    ) ?>
+    )->label(false) ?>
 
     <div class="form-group">
         <?= Html::submitButton(Module::t('message', 'Update'),['class' => 'btn btn-primary']) ?>

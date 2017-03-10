@@ -27,6 +27,10 @@ use yongtiger\setting\Setting;
 class Bootstrap implements BootstrapInterface
 {
 	static $_themeBootstraps;
+    
+    ///[v0.2.4 (ADD# theme screenshot, title)]
+    static $title;
+    static $screenshot;
 
     /**
      * @inheritdoc
@@ -38,7 +42,7 @@ class Bootstrap implements BootstrapInterface
     	$themePath = call_user_func([$namespaceName . '\\ThemeAsset', 'getThemePath']);
 
     	$themes = ThemeManager::getThemes();
-    	$themes[] = ['namespace' => $namespaceName, 'path' => $themePath, 'active' => false];
+    	$themes[] = ['title' => static::$title, 'screenshot' => static::$screenshot, 'namespace' => $namespaceName, 'path' => $themePath, 'active' => false];  ///[v0.2.4 (ADD# theme screenshot, title)]
         ThemeManager::setThemes($themes);
 
     }

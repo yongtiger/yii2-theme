@@ -95,11 +95,10 @@ class AssetBundle extends \yii\web\AssetBundle
      */
     public static function getThemePath()
     {
-        if (static::$themePath === null) {
-            $reflector = new \ReflectionClass(get_called_class());
-            $namespaceName = $reflector->getNamespaceName();
-            static::$themePath = '@' . str_replace('\\', '/', $namespaceName);    ///@see \vendor\yiisoft\yii2\base\Module.php(257)
-        }
+        $reflector = new \ReflectionClass(get_called_class());
+        $namespaceName = $reflector->getNamespaceName();
+        static::$themePath = '@' . str_replace('\\', '/', $namespaceName);    ///@see \vendor\yiisoft\yii2\base\Module.php(257)
+
         return static::$themePath;
     }
 
@@ -110,10 +109,7 @@ class AssetBundle extends \yii\web\AssetBundle
      */
     public static function getPublishedUrl()
     {
-        if (static::$publishedUrl === null) {
-            static::$publishedUrl = Yii::$app->assetManager->getPublishedUrl(static::getThemePath() . '/assets');
-        }
-        return static::$publishedUrl;
+        return Yii::$app->assetManager->getPublishedUrl(static::getThemePath() . '/assets');
     }
 
     /**
