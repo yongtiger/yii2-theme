@@ -20,4 +20,12 @@
  */
 return [
 
+    ///\vendor\yongtiger\yii2-theme\src\controllers\DefaultController.php
+    'Update succeed.' => '更新成功。',
+
+    ///\vendor\yongtiger\yii2-theme\src\views\default\update.php
+	'Update Theme' => '更新主题',
+    'Update' => '更新',
+    'Reset' => '重置',
+
 ];

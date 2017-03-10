@@ -18,6 +18,7 @@ use yii\filters\AccessControl;
 use yii\base\Model;
 use yii\base\DynamicModel;
 use yongtiger\theme\ThemeManager;
+use yongtiger\theme\Module;
 
 /**
  * Default Controller
@@ -68,7 +69,7 @@ class DefaultController extends Controller
             ///@see http://docs.huihoo.com/yii/2.0/yii-helpers-basehtml.html#activeRadioList()-detail
             ThemeManager::setActiveTheme($model->activeIndex === '' ? false : $model->activeIndex);
 
-            // Yii::$app->session->setFlash('success', Module::t('message', 'Update succeed.'));
+            Yii::$app->session->setFlash('success', Module::t('message', 'Update succeed.'));
             return $this->refresh();
         }
 

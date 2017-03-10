@@ -1,5 +1,8 @@
 # Development roadmap
 
+## v0.2.5 (TYPO)
+
+
 ## v0.2.4 (ADD# theme screenshot, title)
 
 
