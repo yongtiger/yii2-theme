@@ -1,5 +1,8 @@
 # Development roadmap
 
+## v0.3.0 (UPG# extends yii\base\theme:theme pathMap supports view files)
+
+
 ## v0.2.6 (FIX# update:radio checked)
 
 

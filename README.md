@@ -1,4 +1,4 @@
-# Yii2-theme v0.2.6 (FIX# update:radio checked)
+# Yii2-theme v0.3.0 (UPG# extends yii\base\theme:theme pathMap supports view files)
 
 [![Latest Stable Version](https://poser.pugx.org/yongtiger/yii2-theme/v/stable)](https://packagist.org/packages/yongtiger/yii2-theme)
 [![Total Downloads](https://poser.pugx.org/yongtiger/yii2-theme/downloads)](https://packagist.org/packages/yongtiger/yii2-theme) 
