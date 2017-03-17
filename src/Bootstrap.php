@@ -153,9 +153,10 @@ class Bootstrap implements BootstrapInterface
      * @return array e.g. `['yii2themeyii\src\Bootstrap', 'yii2themeyii\src\Bootstrap.php']` 
      */
     public static function formatBootstrapPath($bootstrapPathPattern, $themePath, $bootstrapPathFile) {
-    	$ret = $bootstrapPathPattern;
-    	$ret = str_replace('{theme-path}', $themePath, $ret);
-    	$ret = str_replace('{bootstrap-path-file}', $bootstrapPathFile, $ret);
+    	$ret = strtr($bootstrapPathPattern, [  ///[v0.3.1 (CHG# \src\Bootstrap.php:public static function formatBootstrapPath)]
+            '{theme-path}' => $themePath,
+            '{bootstrap-path-file}' => $bootstrapPathFile,
+        ]);
     	$path = FileHelper::normalizePath($ret, DIRECTORY_SEPARATOR) . '.php';
     	return [$ret, $path]; 
     }

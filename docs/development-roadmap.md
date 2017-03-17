@@ -1,5 +1,8 @@
 # Development roadmap
 
+## v0.3.1 (CHG# \src\Bootstrap.php:public static function formatBootstrapPath)
+
+
 ## v0.3.0 (UPG# extends yii\base\theme:theme pathMap supports view files)
 
 
