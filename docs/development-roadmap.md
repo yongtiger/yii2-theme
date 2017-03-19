@@ -1,5 +1,8 @@
 # Development roadmap
 
+## v0.4.0 (FIX# i18n:long text translation)
+
+
 ## v0.3.1 (CHG# \src\Bootstrap.php:public static function formatBootstrapPath)
 
 
