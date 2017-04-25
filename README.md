@@ -1,4 +1,4 @@
-# Yii2-theme v0.4.0 (FIX# i18n:long text translation)
+# Yii2-theme v0.4.1 (ADD# getThemesCallback, setThemesCallback)
 
 [![Latest Stable Version](https://poser.pugx.org/yongtiger/yii2-theme/v/stable)](https://packagist.org/packages/yongtiger/yii2-theme)
 [![Total Downloads](https://poser.pugx.org/yongtiger/yii2-theme/downloads)](https://packagist.org/packages/yongtiger/yii2-theme) 

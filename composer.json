@@ -20,9 +20,7 @@
     "require": {
         "php": ">=5.5",
         "yiisoft/yii2": "*",
-        "yiisoft/yii2-bootstrap": "*",
-
-        "yongtiger/yii2-setting": "*"
+        "yiisoft/yii2-bootstrap": "*"
     },
     "autoload": {
         "psr-4": {

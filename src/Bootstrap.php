@@ -16,7 +16,6 @@ use Yii;
 use yii\base\BootstrapInterface;
 use yii\base\InvalidParamException;
 use yii\helpers\FileHelper;
-use yongtiger\setting\Setting;
 
 /**
  * Class Bootstrap

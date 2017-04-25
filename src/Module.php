@@ -22,11 +22,26 @@ use Yii;
 class Module extends \yii\base\Module
 {
     /**
-     * @inheritdoc
+     * @var string module name
      */
-    public function init()
+    public static $moduleName = 'thememanager';
+
+    ///[v0.4.1 (ADD# getThemesCallback, setThemesCallback)]
+    /**
+     * @var callable
+     */
+    public $getThemesCallback;
+    /**
+     * @var callable
+     */
+    public $setThemesCallback;
+
+    /**
+     * @return static
+     */
+    public static function instance()
     {
-        parent::init();
+        return Yii::$app->getModule(static::$moduleName);
     }
 
     /**

@@ -13,7 +13,7 @@
 namespace yongtiger\theme;
 
 use Yii;
-use yongtiger\setting\Setting;
+use yongtiger\theme\Module;
 
 /**
  * Class ThemeManager
@@ -26,24 +26,24 @@ class ThemeManager
 	static $_activeTheme;
 
     /**
-     * Gets the themes table `theme/thems`.
+     * Gets the themes.
      *
      * @return static
      */
     public static function getThemes() {
         if (static::$_themes === null) {
-            static::$_themes = Setting::get('theme', 'themes', []);   ///get the themes table `theme/thems` from setting
+            static::$_themes = call_user_func(Module::instance()->getThemesCallback);   ///[v0.4.1 (ADD# getThemesCallback, setThemesCallback)]
         }
         return static::$_themes;
     }
 
     /**
-     * Sets the themes table `theme/thems`.
+     * Sets the thems.
      *
-     * @param array $themes the themes table `theme/thems`
+     * @param array $themes
      */
     public static function setThemes($themes) {
-        Setting::set('theme', 'themes', $themes);
+        call_user_func(Module::instance()->setThemesCallback, $themes); ///[v0.4.1 (ADD# getThemesCallback, setThemesCallback)]
         static::$_themes = $themes;
     }
 
@@ -67,7 +67,7 @@ class ThemeManager
     /**
      * Sets the active theme.
      *
-     * @param int $activeIndex active theme index in thethemes table `theme/thems`
+     * @param int $activeIndex active theme index in the themes
      */
     public static function setActiveTheme($activeIndex) {
         foreach ($themes = static::getThemes() as $index => $theme) {
